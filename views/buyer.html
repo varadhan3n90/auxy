@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Welcome Buyer to the auction</title>
+    </head>
+    <body>
+        <h1>Auctioning for Wool</h1>
+        <label>Username:
+        <div>
+            <input type="text" name="username" id="username" value="" autocomplete="off" /> 
+        </div>
+            
+        </label>
+       
+        <label>
+            RANK:
+        <div id="rank"></div>
+        </label>
+      <label>
+         CurrentBidValue:
+          <div id="currentBidValue">0</div>
+      </label>
+        
+        <div style="display:inline-block">
+            <input type="text" name="bidAmount" id="bidAmount" value="" />
+            <button type="submit" id="raiseBidBT">Raise Bid</button>
+        </div>
+        
+        
+        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+        var socket = io();
+        $(function(){
+            $('#raiseBidBT').click(function(){
+                
+                var curentBidVal = 0;
+                curentBidVal = +($('#currentBidValue').text());
+                
+                var enteredVal = 0;
+                enteredVal = +($('#bidAmount').val());
+                $('#currentBidValue').text(curentBidVal + enteredVal)
+                
+                var data = {};
+                data.bidAmount = curentBidVal + enteredVal;
+                data.user = $('#username').val();
+                socket.emit('Bids', data);
+                return false;
+            })
+            
+            socket.on('rank', function(dat){
+                $('#rank').text(dat);
+            })
+        });
+        </script>
+        
+    </body>
+    
+</html>
