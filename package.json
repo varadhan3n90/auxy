@@ -1,0 +1,26 @@
+{
+  "name": "auxy",
+  "version": "0.0.1",
+  "description": "realtime auction system with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rahuldean/auxy.git"
+  },
+  "keywords": [
+    "auction"
+  ],
+  "author": "Auxy Team",
+  "license": "proprietary",
+  "bugs": {
+    "url": "https://github.com/rahuldean/auxy/issues"
+  },
+  "homepage": "https://github.com/rahuldean/auxy",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.2.0"
+  }
+}
