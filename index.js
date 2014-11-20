@@ -52,7 +52,15 @@ io.on('connection', function(socket) {
         for (var j =0; j < BIDS.length; j++){
             var id = BIDS[j].socket;
             console.log('[USER]: '+ msg.user + " [RANK]: " + parseInt(j)+1 + " [SOCK]: " + id);
-            io.sockets.connected[id].emit("rank", parseInt(j)+1);
+            var usrSock = io.sockets.connected[id];
+            var message = {
+                rank: parseInt(j)+1 ,
+                bidvalue: BIDS[j].bidAmount
+            }
+            if (typeof usrSock != 'undefined') {
+                 usrSock.emit("rank", message);
+            }
+           
         }
         
     });
