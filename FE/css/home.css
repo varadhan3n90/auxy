@@ -1,0 +1,25 @@
+#hero{
+height:90%;
+width:100%;	
+position: absolute;
+    overflow : hidden;
+	background : #4B4848;
+	background-size: cover;		
+	background-image: url("../images/theme.jpg");
+	box-shadow : 0px 0px 0px rbga(0,0,0,0.4);
+	margin: -20px 0px 0px 0px;
+}
+
+#inner {
+   font-family: "Lato", "Helvetica Neue", Arial;
+   line-height: 52px;
+   text-align: left;
+   font-size: 37px;
+   text-transform: uppercase;
+   font-weight: 300;
+   letter-spacing: .3px;
+   color: #FFF;
+   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+   -webkit-animation-duration: 1s;
+	
+}
