@@ -22,8 +22,7 @@ exports.ex_SigninUser = function(request, response){
 	console.log('body: '+request.body.username);
 	var username = request.param('username');
 	var password = request.param('password');
-	//var username = request.body.username;
-	//var password = request.body.password;
+
 	var querystring = 'MATCH (user:User { username:\''+username+'\', password:\''+password+'\' }) return user;';
 	console.log(querystring);
 	var query=[querystring].join('\n');

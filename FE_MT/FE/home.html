@@ -12,9 +12,7 @@
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
   }
-  function checkURL(){
-	
-  }
+  
   </script>
   <link rel="stylesheet" href="css/style.css" type="text/css" />
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
@@ -59,11 +57,13 @@
 	    
       <div class="inline" style="margin:100px 0px 0px 200px; width:35%;">
 	  <div class="panel panel-Error" id="errormsgs" style="visibility:hidden; background-color:red">Error</div>
-	  <div class="panel panel-Error" id="errormsgs1" style="background-color:red">Login failed</div>
+	  
 	  <script type="text/javascript"> 
 		var retry = getParameterByName('login');
+		alert(retry);
 		if(retry=='fail'){
 			document.getElementById('errormsgs').style.visibility = "visible";
+			document.getElementById('errormsgs').innerHTML = "Login failed";
 		}else{
 			document.getElementById('errormsgs').style.visibility = "hidden";
 		}
