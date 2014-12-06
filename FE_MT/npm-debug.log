@@ -1,0 +1,90 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'express-cookieParser' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink C:\Program Files (x86)\nodejs\\node.exe
+5 warn package.json fs@0.0.2 fs is also the name of a node core module.
+6 warn package.json fs@0.0.2 No description
+7 warn package.json fs@0.0.2 No repository field.
+8 warn package.json fs@0.0.2 No README data
+9 verbose cache add [ 'express-cookieParser', null ]
+10 verbose cache add name=undefined spec="express-cookieParser" args=["express-cookieParser",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: 'express-cookieParser',
+11 verbose parsed url   path: 'express-cookieParser',
+11 verbose parsed url   href: 'express-cookieParser' }
+12 silly lockFile a3388375-express-cookieParser express-cookieParser
+13 verbose lock express-cookieParser C:\Users\home\AppData\Roaming\npm-cache\a3388375-express-cookieParser.lock
+14 silly lockFile a3388375-express-cookieParser express-cookieParser
+15 silly lockFile a3388375-express-cookieParser express-cookieParser
+16 verbose addNamed [ 'express-cookieParser', '' ]
+17 verbose addNamed [ null, '*' ]
+18 silly lockFile 14a8bf68-express-cookieParser express-cookieParser@
+19 verbose lock express-cookieParser@ C:\Users\home\AppData\Roaming\npm-cache\14a8bf68-express-cookieParser.lock
+20 silly addNameRange { name: 'express-cookieParser', range: '*', hasData: false }
+21 verbose request where is /express-cookieParser
+22 verbose request registry https://registry.npmjs.org/
+23 verbose request id 618f3a33e5fc8a48
+24 verbose url raw /express-cookieParser
+25 verbose url resolving [ 'https://registry.npmjs.org/', './express-cookieParser' ]
+26 verbose url resolved https://registry.npmjs.org/express-cookieParser
+27 verbose request where is https://registry.npmjs.org/express-cookieParser
+28 info trying registry request attempt 1 at 18:24:23
+29 http GET https://registry.npmjs.org/express-cookieParser
+30 http 404 https://registry.npmjs.org/express-cookieParser
+31 verbose headers { date: 'Sat, 06 Dec 2014 12:54:25 GMT',
+31 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+31 verbose headers   'content-type': 'application/json',
+31 verbose headers   'cache-control': 'max-age=0',
+31 verbose headers   'content-length': '52',
+31 verbose headers   'accept-ranges': 'bytes',
+31 verbose headers   via: '1.1 varnish',
+31 verbose headers   age: '0',
+31 verbose headers   'x-served-by': 'cache-sn86-SIN',
+31 verbose headers   'x-cache': 'MISS',
+31 verbose headers   'x-cache-hits': '0',
+31 verbose headers   'x-timer': 'S1417870464.607379,VS0,VE996',
+31 verbose headers   'keep-alive': 'timeout=10, max=50',
+31 verbose headers   connection: 'Keep-Alive' }
+32 silly registry.get cb [ 404,
+32 silly registry.get   { date: 'Sat, 06 Dec 2014 12:54:25 GMT',
+32 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+32 silly registry.get     'content-type': 'application/json',
+32 silly registry.get     'cache-control': 'max-age=0',
+32 silly registry.get     'content-length': '52',
+32 silly registry.get     'accept-ranges': 'bytes',
+32 silly registry.get     via: '1.1 varnish',
+32 silly registry.get     age: '0',
+32 silly registry.get     'x-served-by': 'cache-sn86-SIN',
+32 silly registry.get     'x-cache': 'MISS',
+32 silly registry.get     'x-cache-hits': '0',
+32 silly registry.get     'x-timer': 'S1417870464.607379,VS0,VE996',
+32 silly registry.get     'keep-alive': 'timeout=10, max=50',
+32 silly registry.get     connection: 'Keep-Alive' } ]
+33 silly lockFile 14a8bf68-express-cookieParser express-cookieParser@
+34 silly lockFile 14a8bf68-express-cookieParser express-cookieParser@
+35 error 404 404 Not Found: express-cookieParser
+35 error 404
+35 error 404 'express-cookieParser' is not in the npm registry.
+35 error 404 You should bug the author to publish it
+35 error 404
+35 error 404 Note that you can also install from a
+35 error 404 tarball, folder, or http url, or git url.
+36 error System Windows_NT 6.1.7601
+37 error command "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "express-cookieParser"
+38 error cwd E:\Downloads\apache-tomcat-8.0.14\apache-tomcat-8.0.14\webapps\auxy\auxy2\FE_MT
+39 error node -v v0.10.33
+40 error npm -v 1.4.28
+41 error code E404
+42 verbose exit [ 1, true ]
