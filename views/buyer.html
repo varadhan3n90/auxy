@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <title>Welcome Buyer to the auction</title>
+        <style>
+            .container{
+                margin:0 auto 0 auto;
+            }
+            
+            .jumbotron h1{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="jumbotron">
+        <h1>Auction</h1>
+    </div>
+    <div class= "container">
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">Fabric - 1000 kg</div>
+            <div class="panel-body">
+                Description - Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
+            </div>
+            <div class="panel-footer">
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation"><a href="#">Minimum Bid <span class="badge">$10</span></a></li>
+                <li role="presentation"><a href="#">Increment <span class="badge">$5</span></a></li>
+            </ul>
+            </div>
+        </div>
+        
+        <div class="well">
+            <p>Rank <span  id="rank" class="label label-success">-</span></p>
+            <p>Your Bid <span  id="currentBidValue" class="label label-default"></span></p>
+        </div>
+        <div class="well well-lg">
+        <form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Your Name</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="username" placeholder="Username" autocomplete="off">
+    </div>
+  </div>
+ <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Increase Bid Value By</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="bidAmount" value="" placeholder="Bid Value">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary" id="raiseBidBT" > Bid</button>
+    </div>
+  </div>
+</form>
+
+
+    </div>
+    </div>    
+        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+        var socket = io();
+        $(function(){
+            $('#raiseBidBT').click(function(){
+                
+                var curentBidVal = 0;
+                curentBidVal = +($('#currentBidValue').text());
+                
+                var enteredVal = 0;
+                enteredVal = +($('#bidAmount').val());
+                //$('#currentBidValue').text(curentBidVal + enteredVal)
+                
+                var data = {};
+                data.bidAmount = curentBidVal + enteredVal;
+                data.user = $('#username').val();
+                socket.emit('Bids', data);
+                return false;
+            })
+            
+            socket.on('rank', function(dat){
+                $('#rank').text(dat.rank);
+                $('#currentBidValue').text(dat.bidvalue)
+            })
+        });
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    </body>
+    
+</html>
