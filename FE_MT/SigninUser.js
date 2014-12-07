@@ -29,14 +29,19 @@ exports.ex_SigninUser = function(request, response){
 	
 	db.query(query, params, function(err, results){
 		if(err){			
-			response.send('helo');			
+			response.send('Sorry our db is down.. Please contact administrator..');			
 		}		
-		else if(results.length!=0){		
-			request.session.regenerate(function(){
-				request.session.user = results;
-				request.session.success = 'success';
-			});		
-			response.redirect("/userdash");
+		else if(results.length!=0){
+			//console.log(JSON.stringify(results));
+			if(results[0].user.data._data.isAdmin){
+				response.redirect("/admindash");
+			}else{
+				request.session.regenerate(function(){
+					request.session.user = results;
+					request.session.success = 'success';
+				});		
+				response.redirect("/userdash");
+			}
 		}else{
 			request.session.error = 'invalid login';
 			response.redirect('/?login=fail');

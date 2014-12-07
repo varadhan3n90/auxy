@@ -14,6 +14,7 @@ var SignupUser = require('./SignupUser');
 var SigninUser = require('./SigninUser');
 var AdminAddBid = require('./AdminAddBid');
 var AdminViewBid = require('./AdminViewBid');
+var UserViewBid = require('./UserViewBid');
 
 var app = express();
 // For all Front end
@@ -37,6 +38,14 @@ app.get('/userdash', function(req, res){
 	console.log('UserDash');
 	console.log(req.session.user);
 	res.sendFile(__dirname + '/FE/user_dashboard.html');
+});
+
+
+app.get('/admindash', function(req, res){
+	console.log('AdminDash');
+	// Check login and redirect to this
+	console.log(req.session.user);
+	res.sendFile(__dirname + '/FE/admin_dashboard.html');
 });
 
 
@@ -64,6 +73,13 @@ app.get('/AdminViewBid', function(req, res){
 	console.log('AdminViewBid');
 	output = AdminViewBid.ex_AdminViewBid(req, res);
 	res.send(output);
+});
+
+app.get('/UserViewBid', function(req, res){
+	console.log('UserViewBid');
+	UserViewBid.ex_UserViewBid(req, res, function(output){
+		res.send(output);
+	});	
 });
 
 app.listen(3000);

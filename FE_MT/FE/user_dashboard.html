@@ -46,24 +46,29 @@
 	  <div class="panel panel-Error" id="errormsgs" style="visibility:hidden; background-color:red">Error</div>
         <ul class="nav nav-tabs" style="margin:0px 0px 0px -10px">
           <li class="active"><a class="btn btn-primary btn-lg" href="#home" data-toggle="tab">View Auctions</a></li>
-
-          <!--<li><a class="btn btn-primary btn-lg" href="#profile" data-toggle="tab" onclick="JS_ViewBid()">View Bids</a></li>-->
+		  <li><a class="btn btn-primary btn-lg" href="#profile" data-toggle="tab" onclick="JS_ViewBid()">View Bids</a></li>
         </ul>
 
         <div id="myTabContent" class="tab-content" style="margin:50px 0px 0px 0px">
-			<div class="tab-pane fade active in" id="home">
+			<div class="tab-pane fade active in" id="profile">
             <form class="form-horizontal" onsubmit="createBid()">
               <fieldset>               
-                 			
+					<table class="table table-bordered">
+						<thead><td>Bid Name</td><td>Start Date</td><td>End Date</td><td>Manage</td></thead>
+						<tbody id="ViewBidtbl"></tbody>
+					</table>
 			  </fieldset>
             </form>
           </div>
 
      
-		 <div class="tab-pane fade" id="profile" style="margin:50px 0px 0px 0px">
+		 <div class="tab-pane fade" id="home" style="margin:50px 0px 0px 0px">
 			<form class="form-horizontal" action="" method="GET">
               <fieldset>
-					              
+					<table class="table table-bordered">
+						<thead><td>Bid Name</td><td>Start Date</td><td>End Date</td><td>Manage</td></thead>
+						<tbody id="ViewBidtbl"></tbody>
+					</table>                
 			  </fieldset>
             </form>
           </div>
