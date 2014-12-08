@@ -1,19 +1,119 @@
-<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="bidding_Admindashboard">
+<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="bidding_Userdashboard">
 <head>
   <meta name="generator" content="HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
   <script data-require="angular.js@*" data-semver="1.3.0-beta.5" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
   <script type="text/javascript" src="js/jqueryMin.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/admin_dashboard.js"></script>
+  <script type="text/javascript" src="js/user_dashboard.js"></script>
   <link rel="stylesheet" href="css/style.css" type="text/css" />
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="css/home.css" type="text/css" />
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <title></title>
+  	
+<script type="text/javascript">
+function ViewUserBid(){	
+	$.async = false;	
+	var response = null;			
+	var responselength=0;
+	$.ajax({url:'http://localhost:3000/UserViewBid', dataType:"json", type:"GET", crossDomain: true, success:function(data){		
+		response = data;
+		responselength = data.length;	
+		
+		//console.log(response);
+				
+		var results = response;
+		var i=0;
+		var j=0;
+		var k=0;
+		var itemtemp=[];
+		var items = [];	
+		var finalObj = [];
+		var obj = [];		
+		obj.items = [];
+		if(responselength>0){
+			obj[k] = new Object();
+			obj[k].bidname = results[0]["bid.bidname"];
+			obj[k].starttime = results[0]["bid.starttime"];
+			obj[k].endtime = results[0]["bid.endtime"];
+			obj[k].items=[];
+			obj[k].items[0] = Object();
+			obj[k].items[0].itemname = results[0]["item.itemname"];
+			obj[k].items[0].itemdetail = results[0]["item.itemdetail"];
+			obj[k].items[0].itemprice = results[0]["item.itemprice"];						
+		}
+		
+		for(i=1;i<responselength;i++){			
+			if(results[i]["bid.bidname"] == results[i-1]["bid.bidname"]){								
+				j++;				
+				obj[k].items[j] = Object();				
+				obj[k].items[j].itemname = results[i]["item.itemname"];
+				obj[k].items[j].itemdetail = results[i]["item.itemdetail"];
+				obj[k].items[j].itemprice = results[i]["item.itemprice"];				
+			}
+			else if(results[i]["bid.bidname"] != results[i-1]["bid.bidname"]){												
+				k++;
+				obj[k] = new Object();
+				obj[k].bidname = results[i]["bid.bidname"];
+				obj[k].starttime = results[i]["bid.starttime"];
+				obj[k].endtime = results[i]["bid.endtime"];				
+				obj[k].items = [];			
+				j=0;
+				obj[k].items[j] = Object();
+				obj[k].items[j].itemname = results[i]["item.itemname"];
+				obj[k].items[j].itemdetail = results[i]["item.itemdetail"];
+				obj[k].items[j].itemprice = results[i]["item.itemprice"];								
+			}			
+		}
+		
+		console.log(obj);
+		
+		
+		
+		var tbl = document.getElementById('displayauction');		
+		tbl.innerHTML = "";	
+		var panelgroup=[];
+		var expand=[];
+		var register=[];
+		var divbody=[];
+		for(var i=0;i<obj.length;i++){
+			panelgroup[i] = document.createElement('div');
+			panelgroup[i].className="inline";
+			
+			var divheading = document.createElement('div');			
+			//divheading.innerHTML = "<div class='inline-table' data-target='#"+obj[i].bidname+"' data-toggle='collapse'><table class='table table-bordered'><tr><td width='25%'>"+obj[i].bidname+"</td><td width='25%'>"+obj[i].starttime+"</td><td width='25%'>"+obj[i].endtime+"</td><td width='25%'><button class='btn' onclick='RegisterUserforBid();'>Register</button></td></tr></table></div>";				
+			divheading.innerHTML = "<div><table class='table table-bordered'><tr><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].bidname+"</td><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].starttime+"</td><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].endtime+"</td><td width='25%'><button class='btn' onclick='RegisterUserforBid();'>Register</button></td></tr></table></div>";				
+			
+			divbody[i] = document.createElement('div');
+			divbody[i].id = obj[i].bidname;
+			divbody[i].className="collapse out";
+			
+			var divbodyinnerdiv = [];
+			for(var j=0;j<obj[i].items.length;j++){
+				divbodyinnerdiv[j] = document.createElement('div');						
+				divbodyinnerdiv[j].innerHTML = "<div class='inline'><table class='table table-bordered' style='margin-top:-15px;'><tr><td>"+obj[i].items[j].itemname+"</td><td>"+obj[i].items[j].itemdetail+"</td><td>"+obj[i].items[j].itemprice+"</td></tr></table>";
+				divbody[i].appendChild(divbodyinnerdiv[j]);				
+			}
+									
+			panelgroup[i].appendChild(divheading);
+			panelgroup[i].appendChild(divbody[i]);
+						
+			tbl.appendChild(panelgroup[i]);
+		}
+		
+		
+			
+	}});	
+	
+	$async = true;
+}
+</script>
+
+  
 </head>
 
-<body data-ng-Controller="AdminDashboardController">
-  <div class="navbar navbar-inverse">
+<body data-ng-Controller="UserDashboardController">
+  <div class="navbar navbar-default">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=
       ".navbar-responsive-collapse"></button> <a class="navbar-brand" href="#" color=
@@ -46,37 +146,39 @@
 	  <div class="panel panel-Error" id="errormsgs" style="visibility:hidden; background-color:red">Error</div>
         <ul class="nav nav-tabs" style="margin:0px 0px 0px -10px">
           <li class="active"><a class="btn btn-primary btn-lg" href="#home" data-toggle="tab">View Auctions</a></li>
-		  <li><a class="btn btn-primary btn-lg" href="#profile" data-toggle="tab" onclick="JS_ViewBid()">View Bids</a></li>
+		  <li><a class="btn btn-primary btn-lg" href="#profile" data-toggle="tab">View Bids</a></li>		  
         </ul>
 
         <div id="myTabContent" class="tab-content" style="margin:50px 0px 0px 0px">
-			<div class="tab-pane fade active in" id="profile">
-            <form class="form-horizontal" onsubmit="createBid()">
-              <fieldset>               
-					<table class="table table-bordered">
-						<thead><td>Bid Name</td><td>Start Date</td><td>End Date</td><td>Manage</td></thead>
-						<tbody id="ViewBidtbl"></tbody>
-					</table>
-			  </fieldset>
-            </form>
-          </div>
+			<div class="tab-pane fade active in" id="home">
+				<form class="form-horizontal">
+				  <fieldset>               
+						<table class="table table-bordered">
+							<thead><td width='25%'>Bid Name</td><td width='25%'>Start Date</td><td width='25%'>End Date</td><td width='25%'>Register</td></thead>
+							<tbody id="ViewBidtbl"></tbody>
+						</table>             					
+						<div id="displayauction">
+						</div> 
+				  </fieldset>
+				</form>
+			</div>
+			<script type="text/javascript"> ViewUserBid();</script>
 
-     
-		 <div class="tab-pane fade" id="home" style="margin:50px 0px 0px 0px">
-			<form class="form-horizontal" action="" method="GET">
-              <fieldset>
-					<table class="table table-bordered">
-						<thead><td>Bid Name</td><td>Start Date</td><td>End Date</td><td>Manage</td></thead>
-						<tbody id="ViewBidtbl"></tbody>
-					</table>                
-			  </fieldset>
-            </form>
-          </div>
-        </div>
-	 
+		
+			<div class="tab-pane fade" id="profile" style="margin:50px 0px 0px 0px">
+				<form class="form-horizontal" action="" method="GET">
+				  <fieldset>
+						
+				  </fieldset>
+				</form>
+			</div>
+        
+		
+	 </div>
 	</div>	
-	
-  
+
 </body>
+
+
 </html>
 

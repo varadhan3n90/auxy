@@ -23,21 +23,21 @@ exports.ex_SigninUser = function(request, response){
 	var username = request.param('username');
 	var password = request.param('password');
 
-	var querystring = 'MATCH (user:User { username:\''+username+'\', password:\''+password+'\' }) return user;';
-	console.log(querystring);
+	var querystring = 'MATCH (user:User { username:\''+username+'\', password:\''+password+'\' }) return user.username, user.password, user.IsAdmin;';
 	var query=[querystring].join('\n');
 	
 	db.query(query, params, function(err, results){
-		if(err){			
+		if(err){		
+			console.log(err);
 			response.send('Sorry our db is down.. Please contact administrator..');			
 		}		
 		else if(results.length!=0){
-			//console.log(JSON.stringify(results));
-			if(results[0].user.data._data.isAdmin){
+			console.log(results);
+			if(results[0]["user.username"] && results[0]["user.IsAdmin"]==true){
 				response.redirect("/admindash");
-			}else{
+			}else if(results[0]["user.username"] && results[0]["user.IsAdmin"]==false){
 				request.session.regenerate(function(){
-					request.session.user = results;
+					request.session.user = results[0]["user.username"];
 					request.session.success = 'success';
 				});		
 				response.redirect("/userdash");

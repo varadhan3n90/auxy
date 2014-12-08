@@ -40,14 +40,12 @@ app.get('/userdash', function(req, res){
 	res.sendFile(__dirname + '/FE/user_dashboard.html');
 });
 
-
 app.get('/admindash', function(req, res){
 	console.log('AdminDash');
 	// Check login and redirect to this
 	console.log(req.session.user);
 	res.sendFile(__dirname + '/FE/admin_dashboard.html');
 });
-
 
 app.post('/SignupUser', function(req, res) {
 	console.log('SignupUser');
@@ -56,7 +54,6 @@ app.post('/SignupUser', function(req, res) {
 		res.send(output);		
 	});		
 });
-
 
 app.post('/SigninUser', function(req, res) {
 	console.log('SigninUser');

@@ -20,7 +20,7 @@ app.use(allowCrossDomain);
 var params={}
 
 exports.ex_UserViewBid = function(request, response, callback){	
-	var querystring = 'MATCH (bid:Bid)-[has:Has]->(item:Item) return has;';	 
+	var querystring = 'MATCH (bid:Bid)-[has:Has]->(item:Item) return bid.bidname, bid.starttime, bid.endtime, item.itemname, item.itemdetail, item.itemprice;';	 
 	console.log(querystring);
 	var query=[querystring].join('\n');
 	db.query(query, params, function(err, results){
@@ -28,6 +28,7 @@ exports.ex_UserViewBid = function(request, response, callback){
 			callback(err.messages);
 		}		
 		else if(results){			
+			
 			callback(results);
 		}
 	});		
