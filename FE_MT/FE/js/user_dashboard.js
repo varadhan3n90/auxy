@@ -5,9 +5,9 @@ UserDashboardController = function($scope, $http){
 	$http.defaults.useXDomain = true;	
 	console.log('viewbid');
 	//AddBid
-	$scope.ViewBid = function(bid, count){		
-		console.log('ViewBid');
-		$http({
+	$scope.RegisterUserforBid = function(){		
+		console.log('hi');
+		/*$http({
 			method: 'GET',
 			url: 'http://localhost:3000/UserViewBid',			
 		}).then(onUserBidComplete, onUserBidError);
@@ -17,7 +17,7 @@ UserDashboardController = function($scope, $http){
 		}	
 		var onUserBidError = function(errormsg){		
 			console.log(errormsg);		
-		}			
+		}*/			
 	}
 		
 }

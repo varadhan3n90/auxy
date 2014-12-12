@@ -12,6 +12,17 @@
   <title></title>
   	
 <script type="text/javascript">
+function RegisterUserforBid(bidnameforregister){
+	console.log(bidnameforregister);
+	$.ajax({url:'http://localhost:3000/RegisterForBid', type:"POST", 
+			data: {bidname: bidnameforregister}, dataType:"json", crossDomain: true, 
+			success:function(data){		
+				response = data;
+			}
+	});
+}
+
+
 function ViewUserBid(){	
 	$.async = false;	
 	var response = null;			
@@ -70,6 +81,17 @@ function ViewUserBid(){
 		
 		
 		
+		var x = {};
+		$.ajax({url:'http://localhost:3000/GetUserAuctionRelation', type:"GET", 
+			dataType:"json", crossDomain: true, success:function(data){
+				for(var i=0;i<data.length;i++){
+					x[data[i]["bid.bidname"]] = data[i]["type(r)"];
+				}
+				console.log("GetUserAuctionRelation");
+				console.log(x);
+			
+		
+		
 		var tbl = document.getElementById('displayauction');		
 		tbl.innerHTML = "";	
 		var panelgroup=[];
@@ -81,8 +103,22 @@ function ViewUserBid(){
 			panelgroup[i].className="inline";
 			
 			var divheading = document.createElement('div');			
+			var bidnameforregister = obj[i].bidname;			
+			//console.log(bidnameforregister);
 			//divheading.innerHTML = "<div class='inline-table' data-target='#"+obj[i].bidname+"' data-toggle='collapse'><table class='table table-bordered'><tr><td width='25%'>"+obj[i].bidname+"</td><td width='25%'>"+obj[i].starttime+"</td><td width='25%'>"+obj[i].endtime+"</td><td width='25%'><button class='btn' onclick='RegisterUserforBid();'>Register</button></td></tr></table></div>";				
-			divheading.innerHTML = "<div><table class='table table-bordered'><tr><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].bidname+"</td><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].starttime+"</td><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].endtime+"</td><td width='25%'><button class='btn' onclick='RegisterUserforBid();'>Register</button></td></tr></table></div>";				
+			//divheading.innerHTML = "<div><table class='table table-bordered'><tr><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].bidname+"</td><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].starttime+"</td><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].endtime+"</td><td width='25%'><button class='btn' onclick='RegisterUserforBid(\""+bidnameforregister+"\");'>Register</button></td></tr></table></div>";				
+			var details = "<div><table class='table table-bordered'><tr><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].bidname+"</td><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].starttime+"</td><td width='25%' data-target='#"+obj[i].bidname+"' data-toggle='collapse'>"+obj[i].endtime+"</td><td width='25%'>";
+			console.log('x: '+x[obj[i].bidname]);
+			if(x[obj[i].bidname]=="Register"){
+			details = details + "<button class='btn' >Awaiting approval</button></td></tr></table></div>";
+			}else if(x[obj[i].bidname]=="Registered"){
+			details = details + "<button class='btn' >Approved</button></td></tr></table></div>";
+			}else{			
+			details = details + "<button class='btn' onclick='RegisterUserforBid(\""+bidnameforregister+"\");'>Register</button></td></tr></table></div>";				
+			}
+			divheading.innerHTML = details;
+			
+			
 			
 			divbody[i] = document.createElement('div');
 			divbody[i].id = obj[i].bidname;
@@ -101,7 +137,7 @@ function ViewUserBid(){
 			tbl.appendChild(panelgroup[i]);
 		}
 		
-		
+		}});
 			
 	}});	
 	

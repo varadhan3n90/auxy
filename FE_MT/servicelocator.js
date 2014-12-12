@@ -15,6 +15,9 @@ var SigninUser = require('./SigninUser');
 var AdminAddBid = require('./AdminAddBid');
 var AdminViewBid = require('./AdminViewBid');
 var UserViewBid = require('./UserViewBid');
+var RegisterForBid = require('./RegisterForBid');
+var ManageRegistration = require('./ManageRegistration');
+var GetUserAuctionRelation = require('./GetUserAuctionRelation');
 
 var app = express();
 // For all Front end
@@ -79,4 +82,31 @@ app.get('/UserViewBid', function(req, res){
 	});	
 });
 
+app.post('/RegisterForBid', function(req, res){
+	console.log('RegisterForBid');
+	RegisterForBid.ex_RegisterForBid(req, res, function(output){
+		res.send(output);
+	});
+});
+
+app.post('/ManageRegistration', function(req,res){
+	console.log('ManageRegistration');
+	ManageRegistration.ex_ManageRegistration(req, res, function(output){
+		res.send(output);
+	});
+});
+
+app.post('/ApproveRegistration', function(req,res){
+	console.log('ApproveRegistration');
+	ManageRegistration.ex_ApproveRegistration(req, res, function(output){
+		res.send(output);
+	});
+});
+
+app.get('/GetUserAuctionRelation', function(req,res){
+	console.log('GetUserAuctionRelation');
+	GetUserAuctionRelation.ex_GetUserAuctionRelation(req, res, function(output){
+		res.send(output);
+	});
+});
 app.listen(3000);

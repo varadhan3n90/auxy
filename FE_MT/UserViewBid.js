@@ -27,11 +27,10 @@ exports.ex_UserViewBid = function(request, response, callback){
 		if(err){			
 			callback(err.messages);
 		}		
-		else if(results){			
-			
+		else if(results){	
 			callback(results);
 		}
-	});		
-	
+	});			
 }
+
 
